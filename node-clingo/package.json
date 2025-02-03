@@ -1,0 +1,25 @@
+{
+  "name": "node-clingo",
+  "version": "1.0.0",
+  "description": "Node.js bindings for Clingo answer set solver",
+  "main": "lib/index.js",
+  "scripts": {
+    "install": "node-gyp rebuild",
+    "test": "node test/test.js"
+  },
+  "keywords": [
+    "clingo",
+    "answer-set-programming",
+    "logic-programming"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "bindings": "^1.5.0",
+    "node-addon-api": "^7.1.0"
+  },
+  "devDependencies": {
+    "node-gyp": "^10.0.1"
+  },
+  "gypfile": true
+} 
