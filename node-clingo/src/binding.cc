@@ -96,9 +96,10 @@ bool on_model(clingo_model_t const *model, void *data, bool *goon) {
             break;
         }
         
-        if (i > 0) ss << " ";
+        if (i > 0) ss << std::endl;
         ss << str;
         delete[] str;
+
     }
     
     if (success) {

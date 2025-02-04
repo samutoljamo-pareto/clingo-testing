@@ -6,9 +6,10 @@ async function test() {
   try {
     const mainLp = path.resolve(__dirname, "../calc/main.lp");
     const treeLp = path.resolve(__dirname, "../tree.lp");
+    const queryLp = path.resolve(__dirname, "../queryLanguage.lp");
 
     const result = await clingo.solve({
-      files: [mainLp, treeLp],
+      files: [mainLp, treeLp, queryLp],
     });
 
     console.log(`\nC++ interaction time: ${result.cppExecutionTime}ms`);
