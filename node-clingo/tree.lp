@@ -4,3 +4,8 @@ childResult(Parent, Card, "children") :- card(Card), parent(Card, Parent), not h
 order(Level, "children", 1, "rank", "ASC") :-
     level(Level).
 
+clingo.dll
+
+#show newOrder(@concatenate("what", Level)) :
+    level(Level).
+

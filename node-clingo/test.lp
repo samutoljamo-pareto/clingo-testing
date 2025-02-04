@@ -1,4 +1,3 @@
-
 #script (python)
 from clingo import Number, String, SymbolType
 from datetime import date, datetime, timezone
