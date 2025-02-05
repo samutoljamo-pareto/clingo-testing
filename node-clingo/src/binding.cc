@@ -21,6 +21,22 @@
                         clingo_symbol_t const *arguments, size_t arguments_size, 
                         void *data, clingo_symbol_callback_t symbol_callback, 
                         void *symbol_callback_data) {
+        std::cerr << "Ground callback" << std::endl;
+        std::cerr << "Name: " << name << std::endl;
+        std::cerr << "Arguments size: " << arguments_size << std::endl;
+        std::cerr << "Data: " << data << std::endl;
+        std::cerr << "Symbol callback: " << symbol_callback << std::endl;
+        std::cerr << "Symbol callback data: " << symbol_callback_data << std::endl;
+
+        // if helper, insert it twice as big(should be a number)
+        if (strcmp(name, "helper") == 0) {
+
+            // cast arguments[0] to number
+            int number = arguments[0];
+            clingo_symbol_t sym;
+            clingo_symbol_create_number(number * 2, &sym);
+            return symbol_callback(&sym, 1, symbol_callback_data);
+        }
         return true;
     }
 
@@ -146,14 +162,21 @@
             
             std::unique_ptr<clingo_control_t, void(*)(clingo_control_t*)> ctl_guard(ctl, clingo_control_free);
             
-            // Add the program
+         /*   // Add the program
             if (!clingo_control_add(ctl, "base", nullptr, 0, program.c_str())) {
                 HandleClingoError(env);
+            }*/
+
+           // Add from file
+           if (!clingo_control_load(ctl, "test.lp")) {
+                HandleClingoError(env);
             }
+
             
             // Ground the program
             clingo_part_t parts[] = {{ "base", nullptr, 0 }};
-            if (!clingo_control_ground(ctl, parts, 1, ground_callback, nullptr)) {
+
+            if (!clingo_control_ground(ctl, parts, 1, nullptr, nullptr)) {
                 HandleClingoError(env);
             }
             
@@ -217,12 +240,11 @@
         }
         std::cerr << "Python integration successful" << std::endl;
 
+
         exports.Set(
             Napi::String::New(env, "solve"),
             Napi::Function::New(env, Solve)
         );
-
-
         return exports;
     }
 

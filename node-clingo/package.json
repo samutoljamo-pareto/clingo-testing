@@ -4,7 +4,7 @@
   "description": "Node.js bindings for Clingo answer set solver",
   "main": "lib/index.js",
   "scripts": {
-    "install": "node-gyp rebuild",
+    "install": "node-gyp rebuild && cp clingo-source/build/bin/Release/clingo.dll ./build/Release/clingo.dll",
     "test": "node test/test.js"
   },
   "keywords": [
